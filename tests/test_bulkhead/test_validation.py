@@ -1,6 +1,6 @@
 import pytest
 
-from hyx.bulkhead import bulkhead
+from pyfaulttolerance.bulkhead import bulkhead
 
 
 async def test__bulkhead__validate__positive_nonzero_limits() -> None:

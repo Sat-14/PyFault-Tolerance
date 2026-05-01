@@ -1,17 +1,17 @@
 # Telemetry
 
-Hyx provides built-in telemetry support to help you monitor your fault tolerance components in production.
+pyfaulttolerance provides built-in telemetry support to help you monitor your fault tolerance components in production.
 All components emit events that can be captured by listeners and forwarded to your observability stack.
 
-Telemetry is built on top of Hyx's [event system](./events.md). For details on creating custom listeners or understanding how events flow, see the Events documentation.
+Telemetry is built on top of pyfaulttolerance's [event system](./events.md). For details on creating custom listeners or understanding how events flow, see the Events documentation.
 
 ## Supported Backends
 
 | Backend | Installation | Description |
 |---------|--------------|-------------|
-| [OpenTelemetry](#opentelemetry) | `pip install hyx[otel]` | Industry-standard observability framework |
-| [Prometheus](#prometheus) | `pip install hyx[prometheus]` | Popular metrics and alerting toolkit |
-| [StatsD](#statsd) | `pip install hyx[statsd]` | Simple daemon for aggregating statistics |
+| [OpenTelemetry](#opentelemetry) | `pip install pyfaulttolerance[otel]` | Industry-standard observability framework |
+| [Prometheus](#prometheus) | `pip install pyfaulttolerance[prometheus]` | Popular metrics and alerting toolkit |
+| [StatsD](#statsd) | `pip install pyfaulttolerance[statsd]` | Simple daemon for aggregating statistics |
 
 ## OpenTelemetry
 
@@ -20,7 +20,7 @@ Telemetry is built on top of Hyx's [event system](./events.md). For details on c
 ### Installation
 
 ```sh
-pip install hyx[otel]
+pip install pyfaulttolerance[otel]
 ```
 
 ### Quick Start
@@ -28,7 +28,7 @@ pip install hyx[otel]
 Register listeners for all components with a single call:
 
 ```python
-from hyx.telemetry.otel import register_listeners
+from pyfaulttolerance.telemetry.otel import register_listeners
 
 # Uses the global meter provider
 register_listeners()
@@ -38,7 +38,7 @@ Or with a custom meter:
 
 ```python
 from opentelemetry import metrics
-from hyx.telemetry.otel import register_listeners
+from pyfaulttolerance.telemetry.otel import register_listeners
 
 meter = metrics.get_meter("my-service")
 register_listeners(meter=meter)
@@ -49,8 +49,8 @@ register_listeners(meter=meter)
 You can also register listeners for specific components:
 
 ```python
-from hyx.telemetry.otel import RetryListener
-from hyx.retry import retry
+from pyfaulttolerance.telemetry.otel import RetryListener
+from pyfaulttolerance.retry import retry
 
 listener = RetryListener()
 
@@ -63,14 +63,14 @@ async def my_function():
 
 | Metric | Type | Labels | Description |
 |--------|------|--------|-------------|
-| `hyx.retry.attempts` | Counter | `component`, `exception` | Number of retry attempts |
-| `hyx.retry.exhausted` | Counter | `component` | Retry attempts exhausted |
-| `hyx.retry.success` | Counter | `component` | Successful operations |
-| `hyx.circuitbreaker.state_transitions` | Counter | `component`, `from_state`, `to_state` | State transitions |
-| `hyx.circuitbreaker.success` | Counter | `component`, `state` | Successful operations |
-| `hyx.timeout.exceeded` | Counter | `component` | Timeout exceeded |
-| `hyx.bulkhead.rejected` | Counter | `component` | Rejected due to capacity |
-| `hyx.fallback.triggered` | Counter | `component`, `reason` | Fallback triggered |
+| `pyfaulttolerance.retry.attempts` | Counter | `component`, `exception` | Number of retry attempts |
+| `pyfaulttolerance.retry.exhausted` | Counter | `component` | Retry attempts exhausted |
+| `pyfaulttolerance.retry.success` | Counter | `component` | Successful operations |
+| `pyfaulttolerance.circuitbreaker.state_transitions` | Counter | `component`, `from_state`, `to_state` | State transitions |
+| `pyfaulttolerance.circuitbreaker.success` | Counter | `component`, `state` | Successful operations |
+| `pyfaulttolerance.timeout.exceeded` | Counter | `component` | Timeout exceeded |
+| `pyfaulttolerance.bulkhead.rejected` | Counter | `component` | Rejected due to capacity |
+| `pyfaulttolerance.fallback.triggered` | Counter | `component`, `reason` | Fallback triggered |
 
 ## Prometheus
 
@@ -79,7 +79,7 @@ async def my_function():
 ### Installation
 
 ```sh
-pip install hyx[prometheus]
+pip install pyfaulttolerance[prometheus]
 ```
 
 ### Quick Start
@@ -87,7 +87,7 @@ pip install hyx[prometheus]
 Register listeners for all components:
 
 ```python
-from hyx.telemetry.prometheus import register_listeners
+from pyfaulttolerance.telemetry.prometheus import register_listeners
 
 # Uses the default global registry
 register_listeners()
@@ -97,7 +97,7 @@ Or with a custom registry:
 
 ```python
 from prometheus_client import CollectorRegistry
-from hyx.telemetry.prometheus import register_listeners
+from pyfaulttolerance.telemetry.prometheus import register_listeners
 
 registry = CollectorRegistry()
 register_listeners(registry=registry)
@@ -106,8 +106,8 @@ register_listeners(registry=registry)
 ### Individual Listeners
 
 ```python
-from hyx.telemetry.prometheus import CircuitBreakerListener
-from hyx.circuitbreaker import consecutive_breaker
+from pyfaulttolerance.telemetry.prometheus import CircuitBreakerListener
+from pyfaulttolerance.circuitbreaker import consecutive_breaker
 
 listener = CircuitBreakerListener()
 
@@ -122,14 +122,14 @@ breaker = consecutive_breaker(
 
 | Metric | Type | Labels | Description |
 |--------|------|--------|-------------|
-| `hyx_retry_attempts_total` | Counter | `component`, `exception` | Number of retry attempts |
-| `hyx_retry_exhausted_total` | Counter | `component` | Retry attempts exhausted |
-| `hyx_retry_success_total` | Counter | `component` | Successful operations |
-| `hyx_circuitbreaker_state_transitions_total` | Counter | `component`, `from_state`, `to_state` | State transitions |
-| `hyx_circuitbreaker_success_total` | Counter | `component`, `state` | Successful operations |
-| `hyx_timeout_exceeded_total` | Counter | `component` | Timeout exceeded |
-| `hyx_bulkhead_rejected_total` | Counter | `component` | Rejected due to capacity |
-| `hyx_fallback_triggered_total` | Counter | `component`, `reason` | Fallback triggered |
+| `pyfaulttolerance_retry_attempts_total` | Counter | `component`, `exception` | Number of retry attempts |
+| `pyfaulttolerance_retry_exhausted_total` | Counter | `component` | Retry attempts exhausted |
+| `pyfaulttolerance_retry_success_total` | Counter | `component` | Successful operations |
+| `pyfaulttolerance_circuitbreaker_state_transitions_total` | Counter | `component`, `from_state`, `to_state` | State transitions |
+| `pyfaulttolerance_circuitbreaker_success_total` | Counter | `component`, `state` | Successful operations |
+| `pyfaulttolerance_timeout_exceeded_total` | Counter | `component` | Timeout exceeded |
+| `pyfaulttolerance_bulkhead_rejected_total` | Counter | `component` | Rejected due to capacity |
+| `pyfaulttolerance_fallback_triggered_total` | Counter | `component`, `reason` | Fallback triggered |
 
 ## StatsD
 
@@ -138,7 +138,7 @@ breaker = consecutive_breaker(
 ### Installation
 
 ```sh
-pip install hyx[statsd]
+pip install pyfaulttolerance[statsd]
 ```
 
 ### Quick Start
@@ -146,9 +146,9 @@ pip install hyx[statsd]
 Register listeners for all components:
 
 ```python
-from hyx.telemetry.statsd import register_listeners
+from pyfaulttolerance.telemetry.statsd import register_listeners
 
-# Uses default client (localhost:8125, prefix='hyx')
+# Uses default client (localhost:8125, prefix='pyfaulttolerance')
 register_listeners()
 ```
 
@@ -156,7 +156,7 @@ Or with a custom client:
 
 ```python
 import statsd
-from hyx.telemetry.statsd import register_listeners
+from pyfaulttolerance.telemetry.statsd import register_listeners
 
 client = statsd.StatsClient('statsd.example.com', 8125, prefix='myapp')
 register_listeners(client=client)
@@ -166,8 +166,8 @@ register_listeners(client=client)
 
 ```python
 import statsd
-from hyx.telemetry.statsd import TimeoutListener
-from hyx.timeout import timeout
+from pyfaulttolerance.telemetry.statsd import TimeoutListener
+from pyfaulttolerance.timeout import timeout
 
 client = statsd.StatsClient(prefix='myapp')
 listener = TimeoutListener(client=client)
@@ -179,7 +179,7 @@ async def slow_operation():
 
 ### Metrics Reference
 
-All metrics are prefixed with the client prefix (default: `hyx`).
+All metrics are prefixed with the client prefix (default: `pyfaulttolerance`).
 
 | Metric | Type | Description |
 |--------|------|-------------|

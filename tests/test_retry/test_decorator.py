@@ -2,13 +2,13 @@ from unittest.mock import Mock
 
 import pytest
 
-from hyx.events import EventManager
-from hyx.retry import retry
-from hyx.retry.api import bucket_retry
-from hyx.retry.counters import Counter
-from hyx.retry.events import RetryListener
-from hyx.retry.exceptions import AttemptsExceeded
-from hyx.retry.manager import RetryManager
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.api import bucket_retry
+from pyfaulttolerance.retry.counters import Counter
+from pyfaulttolerance.retry.events import RetryListener
+from pyfaulttolerance.retry.exceptions import AttemptsExceeded
+from pyfaulttolerance.retry.manager import RetryManager
 
 
 class Listener(RetryListener):

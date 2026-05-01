@@ -3,7 +3,7 @@ from typing import Any
 
 import httpx
 
-from hyx.circuitbreaker import consecutive_breaker
+from pyfaulttolerance.circuitbreaker import consecutive_breaker
 
 
 class InventoryTemporaryError(RuntimeError):

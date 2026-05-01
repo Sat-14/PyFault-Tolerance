@@ -2,7 +2,7 @@ import random
 
 import pytest as pytest
 
-from hyx.retry import jitters
+from pyfaulttolerance.retry import jitters
 
 
 @pytest.mark.parametrize(

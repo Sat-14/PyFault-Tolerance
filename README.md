@@ -1,18 +1,18 @@
 <p align="center">
-  <img loading="lazy" src="https://raw.githubusercontent.com/roma-glushko/hyx/main/img/hyx-logo.png" alt="Hyx">
+  <img loading="lazy" src="https://raw.githubusercontent.com/roma-glushko/pyfaulttolerance/main/img/pyfaulttolerance-logo.png" alt="pyfaulttolerance">
 </p>
 <p align="center">
     <em>🧘‍♂️️Lightweight fault tolerance primitives for your resilient and modern Python microservices</em>
 </p>
 <p align="center">
-<a href="https://pypi.org/project/hyx" target="_blank">
-    <img loading="lazy" src="https://img.shields.io/pypi/v/hyx?color=%2318afba&label=pypi%20package" alt="Package Version">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+    <img loading="lazy" src="https://img.shields.io/pypi/v/pyfaulttolerance?color=%2318afba&label=pypi%20package" alt="Package Version">
 </a>
-<a href="https://pypi.org/project/hyx" target="_blank">
-    <img loading="lazy" src="https://img.shields.io/pypi/dm/hyx?color=%2318afba" alt="Downloads">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+    <img loading="lazy" src="https://img.shields.io/pypi/dm/pyfaulttolerance?color=%2318afba" alt="Downloads">
 </a>
-<a href="https://pypi.org/project/hyx" target="_blank">
-  <img loading="lazy" src="https://img.shields.io/pypi/pyversions/hyx.svg?color=%2318afba" alt="Supported Python Versions">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+  <img loading="lazy" src="https://img.shields.io/pypi/pyversions/pyfaulttolerance.svg?color=%2318afba" alt="Supported Python Versions">
 </a>
 
 <a href="https://discord.gg/EUt2P9jrU7" target="_blank">
@@ -21,19 +21,19 @@
 
 <br/>
 
-<a href="https://hyx.readthedocs.io/en/latest/?badge=latest">
-    <img loading="lazy" src="https://readthedocs.org/projects/hyx/badge/?version=latest&color=%2318afba" alt='Documentation Status' />
+<a href="https://pyfaulttolerance.readthedocs.io/en/latest/?badge=latest">
+    <img loading="lazy" src="https://readthedocs.org/projects/pyfaulttolerance/badge/?version=latest&color=%2318afba" alt='Documentation Status' />
 </a>
   
-<a href="https://github.com/roma-glushko/hyx/actions/workflows/tests.yml">
-    <img loading="lazy" src="https://github.com/roma-glushko/hyx/actions/workflows/tests.yml/badge.svg?branch=main" alt='Test Status' />
+<a href="https://github.com/roma-glushko/pyfaulttolerance/actions/workflows/tests.yml">
+    <img loading="lazy" src="https://github.com/roma-glushko/pyfaulttolerance/actions/workflows/tests.yml/badge.svg?branch=main" alt='Test Status' />
 </a>
 
 </p>
 
 ---
 
-**PyFault-Tolerance** (formerly Hyx) is a set of well-known stability patterns that are commonly needed
+**PyFault-Tolerance** (formerly pyfaulttolerance) is a set of well-known stability patterns that are commonly needed
 when you build [microservice-based](https://en.wikipedia.org/wiki/Microservices) applications.
 It is meant to be [Hystrix (Java)](https://github.com/Netflix/Hystrix), [resilience4j (Java)](https://github.com/resilience4j/resilience4j) or [Polly (C#)](https://github.com/App-vNext/Polly) but for the Python world.
 
@@ -63,23 +63,23 @@ flowchart LR
 - Implements five commonly used resiliency patterns with various configurations based on advice and experience of industry leaders (e.g. AWS, Google, Netflix)
 - Idiomatic Pythonic implementation based on [decorators](https://realpython.com/primer-on-python-decorators) and [context managers](https://realpython.com/python-with-statement)
 - [AsyncIO](https://docs.python.org/3/library/asyncio.html) Native Implementation
-- Built-in [telemetry](https://hyx.readthedocs.io/en/latest/telemetry/) support for OpenTelemetry, Prometheus, and StatsD
+- Built-in [telemetry](https://pyfaulttolerance.readthedocs.io/en/latest/telemetry/) support for OpenTelemetry, Prometheus, and StatsD
 - Lightweight. Readable Codebase. High Test Coverage
 
 ## Requirements
 
 - Python 3.9+
-- AsyncIO-powered applications ([no sync support?](https://hyx.readthedocs.io/en/latest/faq/#no-sync-support))
+- AsyncIO-powered applications ([no sync support?](https://pyfaulttolerance.readthedocs.io/en/latest/faq/#no-sync-support))
 
 ## Installation
 
-PyFault-Tolerance can be installed from [PyPi](https://pypi.org/project/hyx):
+PyFault-Tolerance can be installed from [PyPi](https://pypi.org/project/pyfaulttolerance):
 
 ```sh
-pip install hyx
+pip install pyfaulttolerance
 
 # or via uv
-uv add hyx
+uv add pyfaulttolerance
 ```
 
 ### Optional Dependencies
@@ -87,9 +87,9 @@ uv add hyx
 For telemetry support, install with the appropriate extras:
 
 ```sh
-pip install hyx[otel]        # OpenTelemetry
-pip install hyx[prometheus]  # Prometheus
-pip install hyx[statsd]      # StatsD
+pip install pyfaulttolerance[otel]        # OpenTelemetry
+pip install pyfaulttolerance[prometheus]  # Prometheus
+pip install pyfaulttolerance[statsd]      # StatsD
 ```
 
 ## Component Map

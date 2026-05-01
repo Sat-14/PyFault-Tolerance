@@ -2,7 +2,7 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
+from pyfaulttolerance.retry import retry
 
 
 @retry(on=httpx.NetworkError, backoff=0.5)  # delay 500ms on each retry

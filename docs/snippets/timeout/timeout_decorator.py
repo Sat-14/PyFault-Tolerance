@@ -1,6 +1,6 @@
 import asyncio
 
-from hyx.timeout import timeout
+from pyfaulttolerance.timeout import timeout
 
 
 @timeout(1)

@@ -1,8 +1,8 @@
 import asyncio
 from typing import Any
 
-from hyx.fallback import fallback
-from hyx.fallback.typing import ResultT
+from pyfaulttolerance.fallback import fallback
+from pyfaulttolerance.fallback.typing import ResultT
 
 
 def get_default_user_avatar(result: ResultT, *args: Any, **kwargs: Any) -> Any:

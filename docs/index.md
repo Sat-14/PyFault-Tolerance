@@ -3,45 +3,45 @@ hide:
   - feedback
 ---
 
-# Hyx
+# pyfaulttolerance
 
 <p align="center">
-  <a href="https://github.com/roma-glushko/hyx" target="_blank">
-    <img loading="lazy" src="https://raw.githubusercontent.com/roma-glushko/hyx/main/img/hyx-logo.png" alt="Hyx">
+  <a href="https://github.com/roma-glushko/pyfaulttolerance" target="_blank">
+    <img loading="lazy" src="https://raw.githubusercontent.com/roma-glushko/pyfaulttolerance/main/img/pyfaulttolerance-logo.png" alt="pyfaulttolerance">
   </a>
 </p>
 <p align="center">
     <em>🧘‍♂️️ Lightweight fault tolerance primitives for your resilient and modern Python microservices</em>
 </p>
 <p align="center">
-<a href="https://pypi.org/project/hyx" target="_blank">
-    <img loading="lazy" src="https://img.shields.io/pypi/v/hyx?color=%2318afba&label=pypi%20package" alt="Package Version">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+    <img loading="lazy" src="https://img.shields.io/pypi/v/pyfaulttolerance?color=%2318afba&label=pypi%20package" alt="Package Version">
 </a>
-<a href="https://pypi.org/project/hyx" target="_blank">
-    <img loading="lazy" src="https://img.shields.io/pypi/dm/hyx?color=%2318afba" alt="Downloads">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+    <img loading="lazy" src="https://img.shields.io/pypi/dm/pyfaulttolerance?color=%2318afba" alt="Downloads">
 </a>
-<a href="https://pypi.org/project/hyx" target="_blank">
-  <img loading="lazy" src="https://img.shields.io/pypi/pyversions/hyx.svg?color=%2318afba" alt="Supported Python Versions">
+<a href="https://pypi.org/project/pyfaulttolerance" target="_blank">
+  <img loading="lazy" src="https://img.shields.io/pypi/pyversions/pyfaulttolerance.svg?color=%2318afba" alt="Supported Python Versions">
 </a>
 
 <br/>
 
-<a href="https://hyx.readthedocs.io/en/latest/?badge=latest">
-    <img loading="lazy" src="https://readthedocs.org/projects/hyx/badge/?version=latest&color=%2318afba" alt='Documentation Status' />
+<a href="https://pyfaulttolerance.readthedocs.io/en/latest/?badge=latest">
+    <img loading="lazy" src="https://readthedocs.org/projects/pyfaulttolerance/badge/?version=latest&color=%2318afba" alt='Documentation Status' />
 </a>
-<a href="https://github.com/roma-glushko/hyx/actions/workflows/tests.yml">
-    <img loading="lazy" src="https://github.com/roma-glushko/hyx/actions/workflows/tests.yml/badge.svg?branch=main" alt='Test Status' />
+<a href="https://github.com/roma-glushko/pyfaulttolerance/actions/workflows/tests.yml">
+    <img loading="lazy" src="https://github.com/roma-glushko/pyfaulttolerance/actions/workflows/tests.yml/badge.svg?branch=main" alt='Test Status' />
 </a>
-<a href="https://app.codecov.io/github/roma-glushko/hyx">
-    <img loading="lazy" src="https://img.shields.io/codecov/c/gh/roma-glushko/hyx" alt="Coverage" />
+<a href="https://app.codecov.io/github/roma-glushko/pyfaulttolerance">
+    <img loading="lazy" src="https://img.shields.io/codecov/c/gh/roma-glushko/pyfaulttolerance" alt="Coverage" />
 </a>
 </p>
 
 ---
 
-**Hyx** (/ˈhʌɪx/) is a set of well-known stability patterns that are commonly needed
+**pyfaulttolerance** (/ˈhʌɪx/) is a set of well-known stability patterns that are commonly needed
 when you build [microservice-based](https://en.wikipedia.org/wiki/Microservices) applications.
-Hyx is meant to be [Hystrix (Java)](https://github.com/Netflix/Hystrix), [resilience4j (Java)](https://github.com/resilience4j/resilience4j) or [Polly (C#)](https://github.com/App-vNext/Polly) but for the Python world.
+pyfaulttolerance is meant to be [Hystrix (Java)](https://github.com/Netflix/Hystrix), [resilience4j (Java)](https://github.com/resilience4j/resilience4j) or [Polly (C#)](https://github.com/App-vNext/Polly) but for the Python world.
 
 !!! note
 
@@ -56,7 +56,7 @@ Hyx is meant to be [Hystrix (Java)](https://github.com/Netflix/Hystrix), [resili
 - Lightweight. Readable Codebase. High Test Coverage
 
 !!! warning
-    At this stage, Hyx prioritizes speed of development over API stability. 
+    At this stage, pyfaulttolerance prioritizes speed of development over API stability. 
     This is going to change once we implement [main features and use cases](./roadmap.md#m2-pixi).
 
 ## Requirements
@@ -66,23 +66,23 @@ Hyx is meant to be [Hystrix (Java)](https://github.com/Netflix/Hystrix), [resili
 
 ## Installation
 
-Hyx can be installed from [PyPi](https://pypi.org/project/hyx):
+pyfaulttolerance can be installed from [PyPi](https://pypi.org/project/pyfaulttolerance):
 
 === "pip"
 
     ``` sh
-    pip install hyx
+    pip install pyfaulttolerance
     ```
 
 === "uv"
 
     ```sh
-    uv add hyx
+    uv add pyfaulttolerance
     ```
 
 ## Components
 
-Here is a short overview of Hyx's components:
+Here is a short overview of pyfaulttolerance's components:
 
 | Component                                              | Problem                                                                                                                                                                            | Solution                                                                                                                                                                      | Implemented? |
 |--------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
@@ -100,13 +100,13 @@ Here is a short overview of Hyx's components:
 
 ## Stay Tuned
 
-Hyx is a young but rapidly evolving project. 
-There are [tons of things we want to support and integrate with](roadmap.md) to make Hyx suitable for different frameworks and use cases.
+pyfaulttolerance is a young but rapidly evolving project. 
+There are [tons of things we want to support and integrate with](roadmap.md) to make pyfaulttolerance suitable for different frameworks and use cases.
 
 If you don't want to miss our updates, consider the following options:
 
-* give Hyx a star and watch in [Github](https://github.com/roma-glushko/hyx) 
-* follow Roman Hlushko (the creator of Hyx) in [LinkedIn and other social media](https://www.romaglushko.com)
+* give pyfaulttolerance a star and watch in [Github](https://github.com/roma-glushko/pyfaulttolerance) 
+* follow Roman Hlushko (the creator of pyfaulttolerance) in [LinkedIn and other social media](https://www.romaglushko.com)
 
 ## Thanks
 
@@ -114,8 +114,8 @@ If you don't want to miss our updates, consider the following options:
 
     We are staying on the shoulders of giants (c)
 
-There are some open source projects and other resources that heavily influenced and inspired Hyx to emerge.
-Without those projects and people behind them, Hyx wouldn't have been created. 
+There are some open source projects and other resources that heavily influenced and inspired pyfaulttolerance to emerge.
+Without those projects and people behind them, pyfaulttolerance wouldn't have been created. 
 So I wanted to pause for a moment to say a huge thanks wholeheartedly :heart: to:
 
 - [App-vNext/Polly](https://github.com/App-vNext/Polly)
@@ -124,4 +124,4 @@ So I wanted to pause for a moment to say a huge thanks wholeheartedly :heart: to
 
 ## License
 
-This project is licensed under the terms of the [Apache 2.0 license](https://github.com/roma-glushko/hyx/blob/main/LICENSE).
+This project is licensed under the terms of the [Apache 2.0 license](https://github.com/roma-glushko/pyfaulttolerance/blob/main/LICENSE).

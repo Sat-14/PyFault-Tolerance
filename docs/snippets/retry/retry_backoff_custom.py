@@ -3,8 +3,8 @@ from typing import Iterator
 
 import httpx
 
-from hyx.retry import retry
-from hyx.retry.backoffs import MS_TO_SECS, SECS_TO_MS
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.backoffs import MS_TO_SECS, SECS_TO_MS
 
 
 class factorial(Iterator[float]):

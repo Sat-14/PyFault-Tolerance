@@ -1,9 +1,9 @@
 from typing import Generic, TypeVar
 
-from hyx.retry import register_retry_listener
+from pyfaulttolerance.retry import register_retry_listener
 from opentelemetry.metrics import Meter, MeterProvider
 
-from hyx.retry.manager import RetryManager
+from pyfaulttolerance.retry.manager import RetryManager
 from integrations.opentelemetry.retry import RetryMetricListener
 
 ComponentT = TypeVar("ComponentT")
@@ -21,10 +21,10 @@ class Factory(Generic[ComponentT, ListenerT]):
         return self.listener_class(component, *self.args, **self.kwargs)
 
 
-class HyxOtelInstrumentor:
+class pyfaulttoleranceOtelInstrumentor:
     def instrument(
         self,
-        namespace: str = "hyx.service",
+        namespace: str = "pyfaulttolerance.service",
         meter: Meter | None = None,
         meter_provider: MeterProvider | None = None,
     ) -> None:

@@ -1,6 +1,6 @@
 # Event System
 
-Hyx includes an event system that allows you to observe and react to component lifecycle events.
+pyfaulttolerance includes an event system that allows you to observe and react to component lifecycle events.
 This is the foundation for telemetry integrations and enables building custom monitoring solutions.
 
 ## Overview
@@ -33,7 +33,7 @@ Each component type defines its own listener interface. Implement only the metho
 ### RetryListener
 
 ```python
-from hyx.retry.events import RetryListener
+from pyfaulttolerance.retry.events import RetryListener
 
 class MyRetryListener(RetryListener):
     async def on_retry(self, retry, exception, counter, backoff):
@@ -58,7 +58,7 @@ class MyRetryListener(RetryListener):
 ### CircuitBreakerListener (BreakerListener)
 
 ```python
-from hyx.circuitbreaker.events import BreakerListener
+from pyfaulttolerance.circuitbreaker.events import BreakerListener
 
 class MyBreakerListener(BreakerListener):
     async def on_working(self, context, current_state, next_state):
@@ -88,7 +88,7 @@ class MyBreakerListener(BreakerListener):
 ### TimeoutListener
 
 ```python
-from hyx.timeout.events import TimeoutListener
+from pyfaulttolerance.timeout.events import TimeoutListener
 
 class MyTimeoutListener(TimeoutListener):
     async def on_timeout(self, timeout):
@@ -103,7 +103,7 @@ class MyTimeoutListener(TimeoutListener):
 ### BulkheadListener
 
 ```python
-from hyx.bulkhead.events import BulkheadListener
+from pyfaulttolerance.bulkhead.events import BulkheadListener
 
 class MyBulkheadListener(BulkheadListener):
     async def on_bulkhead_full(self, bulkhead):
@@ -118,7 +118,7 @@ class MyBulkheadListener(BulkheadListener):
 ### FallbackListener
 
 ```python
-from hyx.fallback.events import FallbackListener
+from pyfaulttolerance.fallback.events import FallbackListener
 
 class MyFallbackListener(FallbackListener):
     async def on_fallback(self, fallback, result, *args, **kwargs):
@@ -140,11 +140,11 @@ There are two ways to register listeners: **globally** (for all components of a 
 Global listeners receive events from all components of that type in your application:
 
 ```python
-from hyx.retry.events import register_retry_listener
-from hyx.circuitbreaker.events import register_breaker_listener
-from hyx.timeout.events import register_timeout_listener
-from hyx.bulkhead.events import register_bulkhead_listener
-from hyx.fallback.events import register_fallback_listener
+from pyfaulttolerance.retry.events import register_retry_listener
+from pyfaulttolerance.circuitbreaker.events import register_breaker_listener
+from pyfaulttolerance.timeout.events import register_timeout_listener
+from pyfaulttolerance.bulkhead.events import register_bulkhead_listener
+from pyfaulttolerance.fallback.events import register_fallback_listener
 
 # Register once at application startup
 register_retry_listener(MyRetryListener())
@@ -159,7 +159,7 @@ register_fallback_listener(MyFallbackListener())
 Local listeners are attached to specific component instances:
 
 ```python
-from hyx.retry import retry
+from pyfaulttolerance.retry import retry
 
 listener = MyRetryListener()
 
@@ -169,7 +169,7 @@ async def my_function():
 ```
 
 ```python
-from hyx.circuitbreaker import consecutive_breaker
+from pyfaulttolerance.circuitbreaker import consecutive_breaker
 
 listener = MyBreakerListener()
 
@@ -185,8 +185,8 @@ breaker = consecutive_breaker(
 Both global and local listeners can be active simultaneously. Events are dispatched to all registered listeners:
 
 ```python
-from hyx.retry.events import register_retry_listener
-from hyx.retry import retry
+from pyfaulttolerance.retry.events import register_retry_listener
+from pyfaulttolerance.retry import retry
 
 # Global listener for metrics
 register_retry_listener(MetricsListener())
@@ -206,8 +206,8 @@ The `EventManager` tracks all async listener tasks, enabling graceful shutdown a
 ### Basic Usage
 
 ```python
-from hyx.events import EventManager
-from hyx.retry import retry
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.retry import retry
 
 event_manager = EventManager()
 
@@ -226,7 +226,7 @@ await event_manager.wait_for_tasks()
 
 ```python
 import signal
-from hyx.events import EventManager
+from pyfaulttolerance.events import EventManager
 
 event_manager = EventManager()
 
@@ -245,8 +245,8 @@ The EventManager is essential for testing to ensure all events are processed:
 
 ```python
 import pytest
-from hyx.events import EventManager
-from hyx.retry import retry
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.retry import retry
 
 async def test_retry_events():
     event_manager = EventManager()
@@ -276,7 +276,7 @@ async def test_retry_events():
 For advanced use cases, you can use **listener factories** - callables that create listeners dynamically based on the component:
 
 ```python
-from hyx.retry.events import register_retry_listener
+from pyfaulttolerance.retry.events import register_retry_listener
 
 async def create_listener(component):
     """Factory that creates a listener with component context."""
@@ -309,7 +309,7 @@ The `EventDispatcher` is the core routing mechanism. It:
 4. Tracks tasks via EventManager (if provided)
 
 ```python
-from hyx.events import EventDispatcher, ListenerRegistry
+from pyfaulttolerance.events import EventDispatcher, ListenerRegistry
 
 # Internal usage (you typically don't need this directly)
 dispatcher = EventDispatcher(
@@ -324,7 +324,7 @@ dispatcher = EventDispatcher(
 Each component type has a global `ListenerRegistry`:
 
 ```python
-from hyx.events import ListenerRegistry
+from pyfaulttolerance.events import ListenerRegistry
 
 # Defined in each component's events module
 _RETRY_LISTENERS: ListenerRegistry["RetryManager", "RetryListener"] = ListenerRegistry()

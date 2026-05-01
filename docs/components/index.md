@@ -63,10 +63,10 @@ That will restrict your system to **fail in the way you expect it to fail**.
 
 ## Reliability Engineering
 
-Sooo, what is Hyx? 
+Sooo, what is pyfaulttolerance? 
 
-Hyx is your ready-to-use **resiliency engineering toolkit** that will help you to restrict your system to fail in the predictable way.
-Hyx implements and provides primitives and components that are well-known in resiliency engineering and proven to be useful in production settings.
+pyfaulttolerance is your ready-to-use **resiliency engineering toolkit** that will help you to restrict your system to fail in the predictable way.
+pyfaulttolerance implements and provides primitives and components that are well-known in resiliency engineering and proven to be useful in production settings.
 
 All components can be divided into two groups:
 
@@ -75,7 +75,7 @@ All components can be divided into two groups:
 
 ## Components
 
-Here is a list of components that Hyx is currently providing:
+Here is a list of components that pyfaulttolerance is currently providing:
 
 #### Reactive Components
 
@@ -91,7 +91,7 @@ Here is a list of components that Hyx is currently providing:
 
 ## Alternatives
 
-For the sake of completeness, it's worth mentioning that Hyx is one of the ways to solve reliability issues.
+For the sake of completeness, it's worth mentioning that pyfaulttolerance is one of the ways to solve reliability issues.
 There are two more ways to think about the solution:
 
 - Service Meshes. In cloud-native container-based environment, it's possible to delegate resiliency handling to service mesh sidecars running side-by-side with your application. 

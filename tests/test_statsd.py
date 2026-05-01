@@ -1,12 +1,12 @@
 import pytest
 
-from hyx.events import EventManager
+from pyfaulttolerance.events import EventManager
 
 
 class MockStatsClient:
     """A mock StatsD client that records all metric calls."""
 
-    def __init__(self, prefix: str = "hyx") -> None:
+    def __init__(self, prefix: str = "pyfaulttolerance") -> None:
         self._prefix = prefix
         self.metrics: list[dict] = []
 
@@ -31,8 +31,8 @@ def statsd_client():
 
 
 async def test__statsd_retry_listener__on_retry(statsd_client):
-    from hyx.retry import retry
-    from hyx.telemetry.statsd import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.telemetry.statsd import RetryListener
 
     event_manager = EventManager()
     listener = RetryListener(client=statsd_client)
@@ -63,9 +63,9 @@ async def test__statsd_retry_listener__on_retry(statsd_client):
 
 
 async def test__statsd_retry_listener__attempts_exceeded(statsd_client):
-    from hyx.retry import retry
-    from hyx.retry.exceptions import AttemptsExceeded
-    from hyx.telemetry.statsd import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.retry.exceptions import AttemptsExceeded
+    from pyfaulttolerance.telemetry.statsd import RetryListener
 
     event_manager = EventManager()
     listener = RetryListener(client=statsd_client)
@@ -85,8 +85,8 @@ async def test__statsd_retry_listener__attempts_exceeded(statsd_client):
 
 
 async def test__statsd_breaker_listener__state_transitions(statsd_client):
-    from hyx.circuitbreaker import consecutive_breaker
-    from hyx.telemetry.statsd import CircuitBreakerListener
+    from pyfaulttolerance.circuitbreaker import consecutive_breaker
+    from pyfaulttolerance.telemetry.statsd import CircuitBreakerListener
 
     event_manager = EventManager()
     listener = CircuitBreakerListener(client=statsd_client)
@@ -117,9 +117,9 @@ async def test__statsd_breaker_listener__state_transitions(statsd_client):
 async def test__statsd_timeout_listener__on_timeout(statsd_client):
     import asyncio
 
-    from hyx.telemetry.statsd import TimeoutListener
-    from hyx.timeout import timeout
-    from hyx.timeout.exceptions import MaxDurationExceeded
+    from pyfaulttolerance.telemetry.statsd import TimeoutListener
+    from pyfaulttolerance.timeout import timeout
+    from pyfaulttolerance.timeout.exceptions import MaxDurationExceeded
 
     event_manager = EventManager()
     listener = TimeoutListener(client=statsd_client)
@@ -141,9 +141,9 @@ async def test__statsd_timeout_listener__on_timeout(statsd_client):
 async def test__statsd_bulkhead_listener__on_bulkhead_full(statsd_client):
     import asyncio
 
-    from hyx.bulkhead import bulkhead
-    from hyx.bulkhead.exceptions import BulkheadFull
-    from hyx.telemetry.statsd import BulkheadListener
+    from pyfaulttolerance.bulkhead import bulkhead
+    from pyfaulttolerance.bulkhead.exceptions import BulkheadFull
+    from pyfaulttolerance.telemetry.statsd import BulkheadListener
 
     event_manager = EventManager()
     listener = BulkheadListener(client=statsd_client)
@@ -177,8 +177,8 @@ async def test__statsd_bulkhead_listener__on_bulkhead_full(statsd_client):
 
 
 async def test__statsd_fallback_listener__on_fallback(statsd_client):
-    from hyx.fallback import fallback
-    from hyx.telemetry.statsd import FallbackListener
+    from pyfaulttolerance.fallback import fallback
+    from pyfaulttolerance.telemetry.statsd import FallbackListener
 
     event_manager = EventManager()
     listener = FallbackListener(client=statsd_client)

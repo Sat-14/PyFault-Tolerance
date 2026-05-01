@@ -13,7 +13,7 @@ ensuring that **one part of the system won't consume resources at the expense of
 There are different ways to implement bulkheads:
 
 * In multithreaded applications, it may take the form of a queue with a fixed-size worker pool
-* In single-threaded, event-loop-based applications (like Hyx), it takes the form of concurrency limiting
+* In single-threaded, event-loop-based applications (like pyfaulttolerance), it takes the form of concurrency limiting
 
 Hence, the bulkhead is essentially a **concurrency limiting mechanism**. In turn, concurrency limiting can be seen as a form of
 [rate limiting](rate_limiter.md).
@@ -37,7 +37,7 @@ Hence, the bulkhead is essentially a **concurrency limiting mechanism**. In turn
     {!> ./snippets/bulkhead/bulkhead_context.py !}
     ```
 
-::: hyx.bulkhead.bulkhead
+::: pyfaulttolerance.bulkhead.bulkhead
     :docstring:
 
 ## Adaptive Limiting
@@ -45,5 +45,5 @@ Hence, the bulkhead is essentially a **concurrency limiting mechanism**. In turn
 Concurrency can be limited adaptively based on latency statistics from completed requests and a latency objective.
 
 !!! note
-    Hyx doesn't provide an ARC implementation at this moment. [Let us know](../faq.md#missing-a-feature) if this is useful for you.
+    pyfaulttolerance doesn't provide an ARC implementation at this moment. [Let us know](../faq.md#missing-a-feature) if this is useful for you.
 

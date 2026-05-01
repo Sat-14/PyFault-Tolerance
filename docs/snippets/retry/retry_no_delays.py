@@ -2,7 +2,7 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
+from pyfaulttolerance.retry import retry
 
 # Don't do this
 

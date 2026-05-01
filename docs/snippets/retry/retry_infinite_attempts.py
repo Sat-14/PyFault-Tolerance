@@ -2,8 +2,8 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
-from hyx.retry.backoffs import expo
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.backoffs import expo
 
 # Don't do this
 

@@ -1,5 +1,5 @@
 [project]
-name = "hyx"
+name = "pyfaulttolerance"
 version = "0.0.2"
 description = "Lightweight fault tolerance primitives for your modern Python microservices"
 authors = [{ name = "Roman Hlushko", email = "roman.glushko.m@gmail.com" }]
@@ -38,9 +38,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://hyx.readthedocs.io/en/latest/"
-Repository = "https://github.com/roma-glushko/hyx"
-Documentation = "https://hyx.readthedocs.io/en/latest/"
+Homepage = "https://pyfaulttolerance.readthedocs.io/en/latest/"
+Repository = "https://github.com/roma-glushko/pyfaulttolerance"
+Documentation = "https://pyfaulttolerance.readthedocs.io/en/latest/"
 
 [project.optional-dependencies]
 otel = [

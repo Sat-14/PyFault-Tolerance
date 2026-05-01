@@ -2,8 +2,8 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
-from hyx.retry.backoffs import fibo
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.backoffs import fibo
 
 
 @retry(on=httpx.NetworkError, backoff=fibo(min_delay_secs=10, factor_secs=5))

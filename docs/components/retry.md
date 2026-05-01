@@ -19,13 +19,13 @@ The real usage of retries is more nuanced, as you will discover throughout this 
 
 ## Usage
 
-Hyx provides a decorator that brings retry functionality to any function:
+pyfaulttolerance provides a decorator that brings retry functionality to any function:
 
 ```Python hl_lines="5 8"
 {!> ./snippets/retry/retry_basic_usage.py !}
 ```
 
-::: hyx.retry.retry
+::: pyfaulttolerance.retry.retry
     :docstring:
 
 ## Backoffs
@@ -34,7 +34,7 @@ The backoff strategy is a crucial parameter to consider.
 Depending on the backoff, the retry component can either help your system or become a source of problems.
 
 !!! warning
-    For the sake of simplicity, Hyx assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
+    For the sake of simplicity, pyfaulttolerance assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
     Otherwise, the backoff delays may fire later after the thread is unblocked.
 
 ### Constant Backoff
@@ -47,7 +47,7 @@ The most basic backoff strategy is to wait a constant amount of time on each ret
 
 The `float` backoffs are just aliases for the `const` backoff.
 
-::: hyx.retry.backoffs.const
+::: pyfaulttolerance.retry.backoffs.const
     :docstring:
 
 ### Interval Backoff
@@ -60,7 +60,7 @@ You can also provide a list or tuple of floats to pull delays from in a sequenti
 
 The `list[float]` and `tuple[float, ...]` backoffs are just aliases for the `interval` backoff.
 
-::: hyx.retry.backoffs.interval
+::: pyfaulttolerance.retry.backoffs.interval
     :docstring:
 
 ### Exponential Backoff
@@ -68,13 +68,13 @@ The `list[float]` and `tuple[float, ...]` backoffs are just aliases for the `int
 Exponential backoff is one of the most popular backoff strategies.
 Its delays grow rapidly, giving the faulty functionality more and more time to recover on each retry.
 
-Hyx implements Capped Exponential Backoff, which allows you to specify a `max_delay_secs` bound:
+pyfaulttolerance implements Capped Exponential Backoff, which allows you to specify a `max_delay_secs` bound:
 
 ```Python hl_lines="9"
 {!> ./snippets/retry/retry_backoff_expo.py !}
 ```
 
-::: hyx.retry.backoffs.expo
+::: pyfaulttolerance.retry.backoffs.expo
     :docstring:
 
 ### Linear Backoff
@@ -85,7 +85,7 @@ Linear Backoff grows linearly by adding `additive_secs` on each retry:
 {!> ./snippets/retry/retry_backoff_linear.py !}
 ```
 
-::: hyx.retry.backoffs.linear
+::: pyfaulttolerance.retry.backoffs.linear
     :docstring:
 
 ### Fibonacci Backoff
@@ -96,7 +96,7 @@ Another rapidly growing backoff is based on the Fibonacci sequence:
 {!> ./snippets/retry/retry_backoff_fibo.py !}
 ```
 
-::: hyx.retry.backoffs.fibo
+::: pyfaulttolerance.retry.backoffs.fibo
     :docstring:
 
 ### Decorrelated Exponential Backoff
@@ -109,7 +109,7 @@ On every retry, it exponentially widens the range of possible delays.
 {!> ./snippets/retry/retry_backoff_decorrexp.py !}
 ```
 
-::: hyx.retry.backoffs.decorrexp
+::: pyfaulttolerance.retry.backoffs.decorrexp
     :docstring:
 
 ### Soft Exponential Backoff (Beta)
@@ -122,12 +122,12 @@ It was authored by [the Polly community](https://github.com/App-vNext/Polly/issu
 {!> ./snippets/retry/retry_backoff_softexp.py !}
 ```
 
-::: hyx.retry.backoffs.softexp
+::: pyfaulttolerance.retry.backoffs.softexp
     :docstring:
 
 ### Custom Backoffs
 
-In Hyx's design, backoffs are simply iterators that return float numbers and can continue indefinitely.
+In pyfaulttolerance's design, backoffs are simply iterators that return float numbers and can continue indefinitely.
 
 Here is how a factorial backoff could be implemented:
 
@@ -154,7 +154,7 @@ In such cases, we say the requests are **correlated**.
 To mitigate this problem, we can use jitters, which essentially **decorrelate your requests by adding randomness**.
 This helps distribute load more evenly and process the same volume of requests with less capacity.
 
-In Hyx's design, jitters are part of the backoff strategy.
+In pyfaulttolerance's design, jitters are part of the backoff strategy.
 
 !!! note
     [Constant](#constant-backoff), [exponential](#exponential-backoff), [linear](#linear-backoff), and [fibonacci](#fibonacci-backoff) backoffs support
@@ -173,7 +173,7 @@ It uniformly selects a delay from the range between zero and your upper bound:
 !!! note
     Full jitter may choose to perform the action immediately without any delay.
 
-::: hyx.retry.jitters.full
+::: pyfaulttolerance.retry.jitters.full
     :docstring:
 
 ### Equal Jitter
@@ -185,7 +185,7 @@ It takes the middle of the given interval and adds some additional delay, drawn 
 !!! note
     Equal Jitter guarantees that you will wait at least half of the given delay interval.
 
-::: hyx.retry.jitters.equal
+::: pyfaulttolerance.retry.jitters.equal
     :docstring:
 
 ### Jittered Backoffs
@@ -195,7 +195,7 @@ provide built-in decorrelation as part of their algorithm.
 
 ### Custom Jitters
 
-Hyx uses jitters as part of backoff strategies.
+pyfaulttolerance uses jitters as part of backoff strategies.
 Jitters are callables that take a delay in milliseconds generated by the backoff and return the final delay in milliseconds.
 
 !!! note
@@ -227,7 +227,7 @@ Additionally, we jitter each worker's rest time, increasing the chances that the
 
 ### Limit Retry Attempts
 
-Hyx supports an option to retry infinitely, but this should generally be considered **an antipattern**.
+pyfaulttolerance supports an option to retry infinitely, but this should generally be considered **an antipattern**.
 
 ```Python hl_lines="10"
 {!> ./snippets/retry/retry_infinite_attempts.py !}

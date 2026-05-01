@@ -2,8 +2,8 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
-from hyx.retry.backoffs import linear
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.backoffs import linear
 
 
 @retry(on=httpx.NetworkError, backoff=linear(min_delay_secs=10, additive_secs=10, max_delay_secs=60))

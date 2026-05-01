@@ -1,10 +1,10 @@
 # Roadmap
 
-This page provides some transparency on Hyx roadmap and future plans.
+This page provides some transparency on pyfaulttolerance roadmap and future plans.
 This may give some ideas on what to expect from the project and what we might miss.
 
 !!! note
-    Hyx is an open source community-driven project.
+    pyfaulttolerance is an open source community-driven project.
     Hence, we don't have any well-defined deadlines for our milestones like you would expect from financially baked projects.
     The current project pace is based on the best effort.
 
@@ -14,9 +14,9 @@ This may give some ideas on what to expect from the project and what we might mi
 
 ### Github Milestones
 
-* [Implement main components](https://github.com/roma-glushko/hyx/milestone/5)
-* [Documentation / The baseline functionality](https://github.com/roma-glushko/hyx/milestone/1)
-* [Implement CI/CD](https://github.com/roma-glushko/hyx/milestone/6)
+* [Implement main components](https://github.com/roma-glushko/pyfaulttolerance/milestone/5)
+* [Documentation / The baseline functionality](https://github.com/roma-glushko/pyfaulttolerance/milestone/1)
+* [Implement CI/CD](https://github.com/roma-glushko/pyfaulttolerance/milestone/6)
 
 ### Goals
 
@@ -32,15 +32,15 @@ Implemented metrics support for white-box monitoring of all components.
 
 ### Github Milestones
 
-* [Observability / Integrate with OpenTelemetry](https://github.com/roma-glushko/hyx/milestone/2)
-* [Observability / Integrate with Prometheus](https://github.com/roma-glushko/hyx/milestone/3)
+* [Observability / Integrate with OpenTelemetry](https://github.com/roma-glushko/pyfaulttolerance/milestone/2)
+* [Observability / Integrate with Prometheus](https://github.com/roma-glushko/pyfaulttolerance/milestone/3)
 
 ### Completed
 
 * ~~Design an [event system](./events.md) to hook into the component's lifecycle~~
-* ~~Provide integration with [OpenTelemetry](https://opentelemetry.io/) metrics~~ (`pip install hyx[otel]`)
-* ~~Provide integration with [Prometheus](https://prometheus.io/) metrics~~ (`pip install hyx[prometheus]`)
-* ~~Provide integration with [StatsD](https://github.com/statsd/statsd) metrics~~ (`pip install hyx[statsd]`)
+* ~~Provide integration with [OpenTelemetry](https://opentelemetry.io/) metrics~~ (`pip install pyfaulttolerance[otel]`)
+* ~~Provide integration with [Prometheus](https://prometheus.io/) metrics~~ (`pip install pyfaulttolerance[prometheus]`)
+* ~~Provide integration with [StatsD](https://github.com/statsd/statsd) metrics~~ (`pip install pyfaulttolerance[statsd]`)
 
 See the [Telemetry documentation](./telemetry.md) for usage details.
 
@@ -48,12 +48,12 @@ See the [Telemetry documentation](./telemetry.md) for usage details.
 
 **Status**: Future
 
-Pixi is an example system that uses Hyx to ensure resiliency and self-healing.
+Pixi is an example system that uses pyfaulttolerance to ensure resiliency and self-healing.
 
 ### Goals
 
-* Create an example microservice system that uses Hyx as a resiliency toolkit
-* Test Hyx components in composition
+* Create an example microservice system that uses pyfaulttolerance as a resiliency toolkit
+* Test pyfaulttolerance components in composition
 * Provide real-world usage patterns and best practices
 
 ## M3: Advanced Breakers

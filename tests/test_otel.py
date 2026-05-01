@@ -2,8 +2,8 @@ import pytest
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.metrics.export import InMemoryMetricReader
 
-from hyx.events import EventManager
-from hyx.telemetry.otel import METER_NAME
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.telemetry.otel import METER_NAME
 
 
 @pytest.fixture
@@ -39,8 +39,8 @@ def get_metric_value(reader: InMemoryMetricReader, metric_name: str) -> list[dic
 
 
 async def test__otel_retry_listener__on_retry(otel_setup):
-    from hyx.retry import retry
-    from hyx.telemetry.otel import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.telemetry.otel import RetryListener
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -62,21 +62,21 @@ async def test__otel_retry_listener__on_retry(otel_setup):
     assert result == "success"
 
     # Check retry attempts metric
-    retry_metrics = get_metric_value(reader, "hyx.retry.attempts")
+    retry_metrics = get_metric_value(reader, "pyfaulttolerance.retry.attempts")
     assert len(retry_metrics) == 1
     assert retry_metrics[0]["value"] == 2
     assert retry_metrics[0]["attributes"]["exception"] == "ValueError"
 
     # Check success metric
-    success_metrics = get_metric_value(reader, "hyx.retry.success")
+    success_metrics = get_metric_value(reader, "pyfaulttolerance.retry.success")
     assert len(success_metrics) == 1
     assert success_metrics[0]["value"] == 1
 
 
 async def test__otel_retry_listener__attempts_exceeded(otel_setup):
-    from hyx.retry import retry
-    from hyx.retry.exceptions import AttemptsExceeded
-    from hyx.telemetry.otel import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.retry.exceptions import AttemptsExceeded
+    from pyfaulttolerance.telemetry.otel import RetryListener
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -92,14 +92,14 @@ async def test__otel_retry_listener__attempts_exceeded(otel_setup):
     await event_manager.wait_for_tasks()
 
     # Check exhausted metric
-    exhausted_metrics = get_metric_value(reader, "hyx.retry.exhausted")
+    exhausted_metrics = get_metric_value(reader, "pyfaulttolerance.retry.exhausted")
     assert len(exhausted_metrics) == 1
     assert exhausted_metrics[0]["value"] == 1
 
 
 async def test__otel_breaker_listener__state_transitions(otel_setup):
-    from hyx.circuitbreaker import consecutive_breaker
-    from hyx.telemetry.otel import CircuitBreakerListener
+    from pyfaulttolerance.circuitbreaker import consecutive_breaker
+    from pyfaulttolerance.telemetry.otel import CircuitBreakerListener
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -124,7 +124,7 @@ async def test__otel_breaker_listener__state_transitions(otel_setup):
     await event_manager.wait_for_tasks()
 
     # Check state transition metric
-    state_metrics = get_metric_value(reader, "hyx.circuitbreaker.state_transitions")
+    state_metrics = get_metric_value(reader, "pyfaulttolerance.circuitbreaker.state_transitions")
     assert len(state_metrics) == 1
     assert state_metrics[0]["attributes"]["from_state"] == "working"
     assert state_metrics[0]["attributes"]["to_state"] == "failing"
@@ -133,9 +133,9 @@ async def test__otel_breaker_listener__state_transitions(otel_setup):
 async def test__otel_timeout_listener__on_timeout(otel_setup):
     import asyncio
 
-    from hyx.telemetry.otel import TimeoutListener
-    from hyx.timeout import timeout
-    from hyx.timeout.exceptions import MaxDurationExceeded
+    from pyfaulttolerance.telemetry.otel import TimeoutListener
+    from pyfaulttolerance.timeout import timeout
+    from pyfaulttolerance.timeout.exceptions import MaxDurationExceeded
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -151,7 +151,7 @@ async def test__otel_timeout_listener__on_timeout(otel_setup):
     await event_manager.wait_for_tasks()
 
     # Check timeout metric
-    timeout_metrics = get_metric_value(reader, "hyx.timeout.exceeded")
+    timeout_metrics = get_metric_value(reader, "pyfaulttolerance.timeout.exceeded")
     assert len(timeout_metrics) == 1
     assert timeout_metrics[0]["value"] == 1
 
@@ -159,9 +159,9 @@ async def test__otel_timeout_listener__on_timeout(otel_setup):
 async def test__otel_bulkhead_listener__on_bulkhead_full(otel_setup):
     import asyncio
 
-    from hyx.bulkhead import bulkhead
-    from hyx.bulkhead.exceptions import BulkheadFull
-    from hyx.telemetry.otel import BulkheadListener
+    from pyfaulttolerance.bulkhead import bulkhead
+    from pyfaulttolerance.bulkhead.exceptions import BulkheadFull
+    from pyfaulttolerance.telemetry.otel import BulkheadListener
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -191,14 +191,14 @@ async def test__otel_bulkhead_listener__on_bulkhead_full(otel_setup):
     await event_manager.wait_for_tasks()
 
     # Check rejected metric
-    rejected_metrics = get_metric_value(reader, "hyx.bulkhead.rejected")
+    rejected_metrics = get_metric_value(reader, "pyfaulttolerance.bulkhead.rejected")
     assert len(rejected_metrics) == 1
     assert rejected_metrics[0]["value"] == 1
 
 
 async def test__otel_fallback_listener__on_fallback(otel_setup):
-    from hyx.fallback import fallback
-    from hyx.telemetry.otel import FallbackListener
+    from pyfaulttolerance.fallback import fallback
+    from pyfaulttolerance.telemetry.otel import FallbackListener
 
     reader, meter = otel_setup
     event_manager = EventManager()
@@ -217,7 +217,7 @@ async def test__otel_fallback_listener__on_fallback(otel_setup):
     assert result == "fallback_value"
 
     # Check fallback metric
-    fallback_metrics = get_metric_value(reader, "hyx.fallback.triggered")
+    fallback_metrics = get_metric_value(reader, "pyfaulttolerance.fallback.triggered")
     assert len(fallback_metrics) == 1
     assert fallback_metrics[0]["value"] == 1
     assert fallback_metrics[0]["attributes"]["reason"] == "exception"

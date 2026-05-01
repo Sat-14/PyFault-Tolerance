@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from hyx.ratelimit import tokenbucket
+from pyfaulttolerance.ratelimit import tokenbucket
 
 # app is an instance of framework like Flask or FastAPI
 app = FastAPI()

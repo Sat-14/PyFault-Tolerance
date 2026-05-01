@@ -1,6 +1,6 @@
 import asyncio
 
-from hyx.retry import jitters
+from pyfaulttolerance.retry import jitters
 
 
 async def run_worker(delay_between_tasks_secs: float = 10) -> None:

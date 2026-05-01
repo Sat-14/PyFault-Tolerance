@@ -1,7 +1,7 @@
 import pytest
 from prometheus_client import CollectorRegistry
 
-from hyx.events import EventManager
+from pyfaulttolerance.events import EventManager
 
 
 @pytest.fixture
@@ -24,8 +24,8 @@ def get_metric_value(registry: CollectorRegistry, metric_name: str, labels: dict
 
 
 async def test__prometheus_retry_listener__on_retry(registry):
-    from hyx.retry import retry
-    from hyx.telemetry.prometheus import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.telemetry.prometheus import RetryListener
 
     event_manager = EventManager()
     listener = RetryListener(registry=registry)
@@ -46,18 +46,18 @@ async def test__prometheus_retry_listener__on_retry(registry):
     assert result == "success"
 
     # Check retry attempts metric
-    retry_attempts = get_metric_value(registry, "hyx_retry_attempts", {"exception": "ValueError"})
+    retry_attempts = get_metric_value(registry, "pyfaulttolerance_retry_attempts", {"exception": "ValueError"})
     assert retry_attempts == 2
 
     # Check success metric
-    success = get_metric_value(registry, "hyx_retry_success")
+    success = get_metric_value(registry, "pyfaulttolerance_retry_success")
     assert success == 1
 
 
 async def test__prometheus_retry_listener__attempts_exceeded(registry):
-    from hyx.retry import retry
-    from hyx.retry.exceptions import AttemptsExceeded
-    from hyx.telemetry.prometheus import RetryListener
+    from pyfaulttolerance.retry import retry
+    from pyfaulttolerance.retry.exceptions import AttemptsExceeded
+    from pyfaulttolerance.telemetry.prometheus import RetryListener
 
     event_manager = EventManager()
     listener = RetryListener(registry=registry)
@@ -72,13 +72,13 @@ async def test__prometheus_retry_listener__attempts_exceeded(registry):
     await event_manager.wait_for_tasks()
 
     # Check exhausted metric
-    exhausted = get_metric_value(registry, "hyx_retry_exhausted")
+    exhausted = get_metric_value(registry, "pyfaulttolerance_retry_exhausted")
     assert exhausted == 1
 
 
 async def test__prometheus_breaker_listener__state_transitions(registry):
-    from hyx.circuitbreaker import consecutive_breaker
-    from hyx.telemetry.prometheus import CircuitBreakerListener
+    from pyfaulttolerance.circuitbreaker import consecutive_breaker
+    from pyfaulttolerance.telemetry.prometheus import CircuitBreakerListener
 
     event_manager = EventManager()
     listener = CircuitBreakerListener(registry=registry)
@@ -104,7 +104,7 @@ async def test__prometheus_breaker_listener__state_transitions(registry):
     # Check state transition metric
     state_transition = get_metric_value(
         registry,
-        "hyx_circuitbreaker_state_transitions",
+        "pyfaulttolerance_circuitbreaker_state_transitions",
         {"from_state": "working", "to_state": "failing"},
     )
     assert state_transition == 1
@@ -113,9 +113,9 @@ async def test__prometheus_breaker_listener__state_transitions(registry):
 async def test__prometheus_timeout_listener__on_timeout(registry):
     import asyncio
 
-    from hyx.telemetry.prometheus import TimeoutListener
-    from hyx.timeout import timeout
-    from hyx.timeout.exceptions import MaxDurationExceeded
+    from pyfaulttolerance.telemetry.prometheus import TimeoutListener
+    from pyfaulttolerance.timeout import timeout
+    from pyfaulttolerance.timeout.exceptions import MaxDurationExceeded
 
     event_manager = EventManager()
     listener = TimeoutListener(registry=registry)
@@ -130,16 +130,16 @@ async def test__prometheus_timeout_listener__on_timeout(registry):
     await event_manager.wait_for_tasks()
 
     # Check timeout metric
-    exceeded = get_metric_value(registry, "hyx_timeout_exceeded")
+    exceeded = get_metric_value(registry, "pyfaulttolerance_timeout_exceeded")
     assert exceeded == 1
 
 
 async def test__prometheus_bulkhead_listener__on_bulkhead_full(registry):
     import asyncio
 
-    from hyx.bulkhead import bulkhead
-    from hyx.bulkhead.exceptions import BulkheadFull
-    from hyx.telemetry.prometheus import BulkheadListener
+    from pyfaulttolerance.bulkhead import bulkhead
+    from pyfaulttolerance.bulkhead.exceptions import BulkheadFull
+    from pyfaulttolerance.telemetry.prometheus import BulkheadListener
 
     event_manager = EventManager()
     listener = BulkheadListener(registry=registry)
@@ -168,13 +168,13 @@ async def test__prometheus_bulkhead_listener__on_bulkhead_full(registry):
     await event_manager.wait_for_tasks()
 
     # Check rejected metric
-    rejected = get_metric_value(registry, "hyx_bulkhead_rejected")
+    rejected = get_metric_value(registry, "pyfaulttolerance_bulkhead_rejected")
     assert rejected == 1
 
 
 async def test__prometheus_fallback_listener__on_fallback(registry):
-    from hyx.fallback import fallback
-    from hyx.telemetry.prometheus import FallbackListener
+    from pyfaulttolerance.fallback import fallback
+    from pyfaulttolerance.telemetry.prometheus import FallbackListener
 
     event_manager = EventManager()
     listener = FallbackListener(registry=registry)
@@ -192,5 +192,5 @@ async def test__prometheus_fallback_listener__on_fallback(registry):
     assert result == "fallback_value"
 
     # Check fallback metric
-    triggered = get_metric_value(registry, "hyx_fallback_triggered", {"reason": "exception"})
+    triggered = get_metric_value(registry, "pyfaulttolerance_fallback_triggered", {"reason": "exception"})
     assert triggered == 1

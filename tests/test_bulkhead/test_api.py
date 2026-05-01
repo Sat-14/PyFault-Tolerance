@@ -3,10 +3,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from hyx.bulkhead import BulkheadListener, bulkhead
-from hyx.bulkhead.exceptions import BulkheadFull
-from hyx.bulkhead.manager import BulkheadManager
-from hyx.events import EventManager
+from pyfaulttolerance.bulkhead import BulkheadListener, bulkhead
+from pyfaulttolerance.bulkhead.exceptions import BulkheadFull
+from pyfaulttolerance.bulkhead.manager import BulkheadManager
+from pyfaulttolerance.events import EventManager
 
 
 class Listener(BulkheadListener):

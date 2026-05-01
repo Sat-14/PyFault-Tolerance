@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from hyx.bulkhead import bulkhead
+from pyfaulttolerance.bulkhead import bulkhead
 
 # app is an instance of framework like Flask or FastAPI
 app = FastAPI()

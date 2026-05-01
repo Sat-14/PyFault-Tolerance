@@ -2,7 +2,7 @@ import asyncio
 
 import httpx
 
-from hyx.retry import retry
+from pyfaulttolerance.retry import retry
 
 
 @retry(on=httpx.NetworkError, attempts=4, backoff=(0.5, 1.0, 1.5, 2.0))

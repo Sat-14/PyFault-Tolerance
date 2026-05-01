@@ -1,6 +1,6 @@
-from hyx.retry.counters import Counter
-from hyx.retry.events import RetryListener
-from hyx.retry.manager import RetryManager
+from pyfaulttolerance.retry.counters import Counter
+from pyfaulttolerance.retry.events import RetryListener
+from pyfaulttolerance.retry.manager import RetryManager
 
 from opentelemetry.metrics import get_meter
 

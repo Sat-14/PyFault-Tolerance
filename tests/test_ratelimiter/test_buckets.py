@@ -2,8 +2,8 @@ import asyncio
 
 import pytest
 
-from hyx.ratelimit.buckets import TokenBucket
-from hyx.ratelimit.exceptions import EmptyBucket
+from pyfaulttolerance.ratelimit.buckets import TokenBucket
+from pyfaulttolerance.ratelimit.exceptions import EmptyBucket
 
 
 async def test__token_bucket_success() -> None:

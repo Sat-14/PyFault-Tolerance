@@ -3,10 +3,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from hyx.events import EventManager
-from hyx.fallback import FallbackListener, fallback
-from hyx.fallback.manager import FallbackManager
-from hyx.fallback.typing import ResultT
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.fallback import FallbackListener, fallback
+from pyfaulttolerance.fallback.manager import FallbackManager
+from pyfaulttolerance.fallback.typing import ResultT
 
 
 class Listener(FallbackListener):

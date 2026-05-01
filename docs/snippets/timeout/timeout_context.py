@@ -1,6 +1,6 @@
 import asyncio
 
-from hyx.timeout import timeout
+from pyfaulttolerance.timeout import timeout
 
 
 async def copy_directory(source_dir: str, destination_dir: str) -> None:

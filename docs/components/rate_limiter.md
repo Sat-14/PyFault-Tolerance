@@ -57,7 +57,7 @@ The bucket is replenished with new tokens at a constant rate equal to `1/request
     {!> ./snippets/ratelimiter/ratelimiter_context.py !}
     ```
 
-::: hyx.ratelimit.tokenbucket
+::: pyfaulttolerance.ratelimit.tokenbucket
     :docstring:
 
 ### Dynamic Rate Limiters
@@ -96,7 +96,7 @@ If this behavior is unintended, or you have a well-defined SLA for your request 
 you should consider [distributed rate limiters](#distributed-rate-limiters).
 
 !!! note
-    This is the only type of state that Hyx currently supports. [Let us know](../faq.md#missing-a-feature) if this is useful for you.
+    This is the only type of state that pyfaulttolerance currently supports. [Let us know](../faq.md#missing-a-feature) if this is useful for you.
 
 ### Distributed Rate Limiters
 
@@ -110,7 +110,7 @@ Having a database dependency is a reasonable overhead if you need to enforce an 
 Otherwise, if you don't have strong reasons for introducing a database, consider using [local rate limiters](#localin-memory-rate-limiters).
 
 !!! note
-    Hyx doesn't currently support distributed components. This may change in [the future](../roadmap.md).
+    pyfaulttolerance doesn't currently support distributed components. This may change in [the future](../roadmap.md).
 
     [Let us know](../faq.md#missing-a-feature) if this is useful for you.
 

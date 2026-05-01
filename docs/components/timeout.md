@@ -16,7 +16,7 @@ Some functionality comes with built-in timeouts. For example, if you're using an
 * [IOTHRIFT: Client Timeout](https://aiothrift.readthedocs.io/en/latest/examples.html?highlight=timeout#aio-thrift-client)
 
 For situations where this is not the case,
-Hyx provides a decorator and a context manager to help with setting up timeouts.
+pyfaulttolerance provides a decorator and a context manager to help with setting up timeouts.
 
 ## Use Cases
 
@@ -39,11 +39,11 @@ Hyx provides a decorator and a context manager to help with setting up timeouts.
     {!> ./snippets/timeout/timeout_context.py !}
     ```
 
-::: hyx.timeout.timeout
+::: pyfaulttolerance.timeout.timeout
     :docstring:
 
 !!! warning
-    For the sake of simplicity, Hyx assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
+    For the sake of simplicity, pyfaulttolerance assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
     Otherwise, the timeout functionality may fire with a delay after the thread is unblocked.
 
 ### Distributed Timeout
@@ -61,6 +61,6 @@ If that limit is exceeded, microservices can ignore requests that have already t
 This is called a distributed timeout (a.k.a. deadlines or timeout budget).
 
 !!! info
-    Hyx doesn't yet provide a way to easily add a distributed budget,
+    pyfaulttolerance doesn't yet provide a way to easily add a distributed budget,
     as it would require integration with the API framework of your choice. We have [some plans](../roadmap.md) to support that.
     [Let us know](../faq.md#missing-a-feature) if this is useful for you.

@@ -21,5 +21,5 @@ and it comes in different forms depending on the context and functionality requi
 {!> ./snippets/fallback/fallback_decorator.py !}
 ```
 
-::: hyx.fallback.fallback
+::: pyfaulttolerance.fallback.fallback
     :docstring:

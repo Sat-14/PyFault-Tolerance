@@ -3,7 +3,7 @@ from typing import Any
 
 import pytest
 
-from hyx.retry import backoffs
+from pyfaulttolerance.retry import backoffs
 
 
 @pytest.mark.parametrize(

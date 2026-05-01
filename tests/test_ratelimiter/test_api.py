@@ -2,8 +2,8 @@ import asyncio
 
 import pytest
 
-from hyx.ratelimit import TokenBucketLimiter, ratelimiter, tokenbucket
-from hyx.ratelimit.exceptions import RateLimitExceeded
+from pyfaulttolerance.ratelimit import TokenBucketLimiter, ratelimiter, tokenbucket
+from pyfaulttolerance.ratelimit.exceptions import RateLimitExceeded
 
 
 async def test__ratelimiter__decorator() -> None:

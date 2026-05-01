@@ -1,2 +1,2 @@
-__name__ = "hyx-otel"
+__name__ = "pyfaulttolerance-otel"
 __version__ = "0.0.1"

@@ -3,10 +3,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from hyx.events import EventManager
-from hyx.timeout import TimeoutListener, timeout
-from hyx.timeout.exceptions import MaxDurationExceeded
-from hyx.timeout.manager import TimeoutManager
+from pyfaulttolerance.events import EventManager
+from pyfaulttolerance.timeout import TimeoutListener, timeout
+from pyfaulttolerance.timeout.exceptions import MaxDurationExceeded
+from pyfaulttolerance.timeout.manager import TimeoutManager
 
 
 class Listener(TimeoutListener):

@@ -32,7 +32,7 @@ Circuit breakers are implemented as state machines. The following states are sup
 * `Recovering` *(a.k.a. the half-open state)* - the recovery delay is over and the system is being probed.
 
 !!! note
-    Hyx doesn't follow the traditional state names inspired by electrical circuit breakers.
+    pyfaulttolerance doesn't follow the traditional state names inspired by electrical circuit breakers.
     We believe you can find more intuitive names if you look outside that analogy.
 
 ## Usage
@@ -56,12 +56,12 @@ Breakers come in two flavors:
     The typical usage is to create a single breaker instance and use or inject it wherever you interact with the underlying subsystem that may fail.
 
 !!! warning
-    For the sake of simplicity, Hyx assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
+    For the sake of simplicity, pyfaulttolerance assumes that you are following AsyncIO best practices and not running CPU-intensive operations in the main thread.
     Otherwise, the breaker delays may fire later after the thread is unblocked.
 
 ## Breakers
 
 ### Consecutive Breaker
 
-::: hyx.circuitbreaker.consecutive_breaker
+::: pyfaulttolerance.circuitbreaker.consecutive_breaker
     :docstring:

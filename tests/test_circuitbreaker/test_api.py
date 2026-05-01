@@ -4,11 +4,11 @@ from unittest.mock import Mock
 
 import pytest
 
-from hyx.circuitbreaker import BreakerListener, consecutive_breaker
-from hyx.circuitbreaker.context import BreakerContext
-from hyx.circuitbreaker.exceptions import BreakerFailing
-from hyx.circuitbreaker.states import BreakerState, FailingState, RecoveringState, WorkingState
-from hyx.events import EventManager
+from pyfaulttolerance.circuitbreaker import BreakerListener, consecutive_breaker
+from pyfaulttolerance.circuitbreaker.context import BreakerContext
+from pyfaulttolerance.circuitbreaker.exceptions import BreakerFailing
+from pyfaulttolerance.circuitbreaker.states import BreakerState, FailingState, RecoveringState, WorkingState
+from pyfaulttolerance.events import EventManager
 
 
 class Listener(BreakerListener):

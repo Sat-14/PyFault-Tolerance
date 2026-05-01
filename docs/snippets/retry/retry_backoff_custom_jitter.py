@@ -4,8 +4,8 @@ from functools import partial
 
 import httpx
 
-from hyx.retry import retry
-from hyx.retry.backoffs import expo
+from pyfaulttolerance.retry import retry
+from pyfaulttolerance.retry.backoffs import expo
 
 
 def randomixin(delay: float, *, max_mixing: float = 20) -> float:
