@@ -1,52 +1,44 @@
-#  PyFault-Tolerance: Bulletproof Python Microservices
+# PyFault-Tolerance: Resilient Python Microservices
 
-Hello! Welcome to **PyFault-Tolerance**. 
+Welcome to PyFault-Tolerance. 
 
-If you've ever built microservices, you know that things inevitably go wrong. Networks drop, third-party APIs go down, and databases get overloaded. I built this library to give Python developers a simple, elegant toolkit to handle these failures gracefully.
+In distributed microservice architectures, transient failures are inevitable. Network packets drop, downstream APIs experience latency spikes, and databases occasionally refuse connections. PyFault-Tolerance is an `asyncio`-native library designed to wrap your unreliable network calls in robust stability patterns, preventing localized failures from cascading and bringing down your entire system.
 
-Think of it as a safety net for your code—protecting your system from crashing entirely just because one small piece failed.
+## The Resiliency Pipeline
 
-##  What Does It Do?
-
-It provides five essential stability patterns that you can wrap around your code easily:
-1. **Circuit Breaker**: Stops sending traffic to a broken service until it recovers.
-2. **Retry**: Automatically tries an operation again if it fails momentarily.
-3. **Timeout**: Prevents your code from waiting forever on a slow response.
-4. **Bulkhead**: Limits how many resources one specific task can consume.
-5. **Rate Limiter**: Controls the speed of incoming traffic so you don't get overwhelmed.
-
-##  How They Work Together
-
-Here is a simplified flowchart showing how these patterns protect a request before it reaches an external service:
+PyFault-Tolerance implements five core resiliency patterns that can be composed together using simple Python decorators or async context managers.
 
 ```mermaid
 flowchart LR
-    %% Friendly styling
-    classDef client fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px,color:#333,rx:10,ry:10
-    classDef protection fill:#BBDEFB,stroke:#1976D2,stroke-width:2px,color:#333,rx:5,ry:5
-    classDef external fill:#FFCC80,stroke:#F57C00,stroke-width:2px,color:#333,rx:10,ry:10
-    classDef error fill:#FFCDD2,stroke:#D32F2F,stroke-width:2px,color:#333,rx:10,ry:10
+    classDef component stroke:#333,stroke-width:2px;
 
-    Req([" User Request"]):::client --> CB{"Circuit Breaker\n(Is service healthy?)"}:::protection
+    Req(["Client Request"]):::component --> CB{"Circuit Breaker"}:::component
     
-    CB -- Yes --> RL{"Rate Limiter\n(Too fast?)"}:::protection
-    CB -- No (Broken) --> FB["Fallback\n(Show default data)"]:::error
+    CB -- Closed (Healthy) --> RL{"Rate Limiter"}:::component
+    CB -- Open (Failing) --> FB["Fallback Handler"]:::component
     
-    RL -- Allowed --> BH{"Bulkhead\n(Too busy?)"}:::protection
-    RL -- Denied --> FB
+    RL -- Under Limit --> BH{"Bulkhead"}:::component
+    RL -- Over Limit --> FB
     
-    BH -- Space available --> RT{"Retry\n(Try 3 times)"}:::protection
-    BH -- Full --> FB
+    BH -- Capacity Available --> RT{"Retry Logic"}:::component
+    BH -- Queue Full --> FB
     
-    RT -- "Call API" --> Ext[" External Service"]:::external
-    Ext -.->|Fails| RT
+    RT -- Execute Call --> Ext["External API"]:::component
+    Ext -.->|Timeout / Error| RT
     
-    Ext -->|Success| Success([" Fast Response!"]):::client
-    RT -.->|All attempts failed| FB
+    Ext -->|Success| Success(["Successful Response"]):::component
+    RT -.->|Max Retries Reached| FB
 ```
 
-##  Getting Started
+## Technical Implementations
 
-It is fully async-native and built on top of modern Python `asyncio`. I've kept the codebase lightweight and highly readable, so you can easily understand what's happening under the hood.
+1. **Circuit Breaker**: Monitors the failure rate of outgoing requests. If the failure threshold is exceeded, the circuit trips to an "Open" state, failing fast and giving the downstream service time to recover. It periodically enters a "Half-Open" state to test if the service has stabilized before fully closing again.
+2. **Retry Mechanism**: Automatically re-executes failed operations based on configurable backoff strategies (e.g., Exponential Backoff with Jitter). This handles transient network blips effectively.
+3. **Timeout**: Enforces strict upper bounds on execution time using `asyncio.wait_for` semantics, preventing resource exhaustion caused by infinitely hanging sockets.
+4. **Bulkhead (Concurrency Limiter)**: Implements asynchronous semaphores to restrict the maximum number of concurrent executions for a specific resource. This ensures that one slow endpoint doesn't consume the entire connection pool.
+5. **Rate Limiter**: Utilizes a Token Bucket algorithm to throttle outbound requests, ensuring you stay within the rate limits imposed by third-party APIs.
+6. **Fallback**: Provides graceful degradation by returning default responses or cached data when all primary execution attempts fail or are rejected by the protective layers above.
 
-Just install it and start wrapping your tricky network calls!
+## Telemetry Integration
+
+PyFault-Tolerance natively exports internal state changes and execution metrics (such as circuit breaker trips and retry counts) to standard observability backends including OpenTelemetry, Prometheus, and StatsD.
