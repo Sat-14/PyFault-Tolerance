@@ -1,0 +1,104 @@
+strict: true
+
+site_name: Hyx
+site_author: Roman Hlushko
+site_description: Lightweight fault tolerance primitives for your resilient and modern Python microservices
+site_url: https://hyx.readthedocs.io/
+
+copyright: Copyright &copy; 2022 - Present, <a target="_blank" href="https://www.romaglushko.com/">Roman Hlushko</a> - <a href="#__consent">Change cookie settings</a>
+
+theme:
+  name: material
+  icon:
+    logo: material/meditation
+    repo: fontawesome/brands/github
+  palette:
+  - media: '(prefers-color-scheme: light)'
+    scheme: default
+    primary: cyan
+    accent: light green
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to light mode
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: cyan
+    accent: light green
+    toggle:
+      icon: material/weather-night
+      name: Switch to dark mode
+
+  features:
+    - navigation.sections
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+repo_name: roma-glushko/hyx
+repo_url: https://github.com/roma-glushko/hyx
+edit_uri: ''
+
+plugins:
+- search
+
+markdown_extensions:
+- toc:
+    permalink: true
+- admonition
+- pymdownx.details
+- pymdownx.superfences
+- mkautodoc
+- markdown.extensions.codehilite:
+    guess_lang: false
+- mdx_include:
+    base_path: docs
+- codehilite
+- md_in_html
+- attr_list
+- pymdownx.emoji:
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+- pymdownx.superfences:
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format ''
+- pymdownx.tabbed:
+    alternate_style: true
+
+extra:
+    consent:
+        title: Cookie consent
+        description: "We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better."
+
+    analytics:
+      provider: google
+      property: G-5TSGMG0S5G
+      feedback:
+        title: Was this page helpful?
+        ratings:
+        - icon: material/thumb-up-outline
+          name: This page was helpful
+          data: 1
+          note: Thanks for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page could be improved
+          data: 0
+          note: Thanks for your feedback! Help us improve this page by using our <a href="https://github.com/roma-glushko/hyx/issues/new?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">feedback form</a>
+
+nav:
+- Getting Started: index.md
+- Components:
+    - Introduction: components/index.md
+    - Retries: components/retry.md
+    - Circuit Breakers: components/circuit_breakers.md
+    - Timeouts: components/timeout.md
+    - Fallbacks: components/fallback.md
+    - Rate Limiters: components/rate_limiter.md
+    - Bulkheads: components/bulkhead.md
+- Events: events.md
+- Telemetry: telemetry.md
+- Roadmap: roadmap.md
+- FAQ: faq.md
+# - Release Notes: release_notes.md

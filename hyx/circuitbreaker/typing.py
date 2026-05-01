@@ -1,0 +1,1 @@
+DelayT = float | int

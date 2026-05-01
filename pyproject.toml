@@ -1,0 +1,121 @@
+[project]
+name = "hyx"
+version = "0.0.2"
+description = "Lightweight fault tolerance primitives for your modern Python microservices"
+authors = [{ name = "Roman Hlushko", email = "roman.glushko.m@gmail.com" }]
+license = { text = "Apache-2.0" }
+readme = "README.md"
+requires-python = ">=3.9,<4.0"
+
+keywords = [
+    "resiliency",
+    "stability",
+    "retries",
+    "bulkhead",
+    "rate limiting",
+    "concurrency limiting",
+    "microservices",
+    "distributed systems",
+    "timeouts",
+    "circuit breakers"
+]
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: Stackless",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Networking",
+]
+
+[project.urls]
+Homepage = "https://hyx.readthedocs.io/en/latest/"
+Repository = "https://github.com/roma-glushko/hyx"
+Documentation = "https://hyx.readthedocs.io/en/latest/"
+
+[project.optional-dependencies]
+otel = [
+    "opentelemetry-api>=1.20.0",
+]
+statsd = [
+    "statsd>=4.0.0",
+]
+prometheus = [
+    "prometheus-client>=0.17.0",
+]
+
+[dependency-groups]
+dev = [
+    "opentelemetry-api>=1.20.0",
+    "statsd>=4.0.0",
+    "prometheus-client>=0.17.0",
+    "pytest>=7.2.0",
+    "mypy>=0.991",
+    "ruff>=0.0.261",
+    "pytest-asyncio>=0.20.3",
+    "coverage>=7.0.1",
+    "mutmut>=2.4.3",
+    "pytest-cov>=4.0.0",
+    "opentelemetry-sdk>=1.39.1",
+]
+docs = [
+    "mkdocs>=1.4.2",
+    "mkdocs-material>=8.5.11",
+    "mdx-include>=1.4.2",
+    "mkautodoc>=0.2.0",
+    "httpx>=0.23.1",
+    "fastapi>=0.95.1",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
